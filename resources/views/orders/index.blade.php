@@ -98,6 +98,7 @@
                                             <tr>
                                                 <th>Invoice</th>
                                                 <th>Pelanggan</th>
+                                                <th>No. Meja</th>
                                                 <th>Total Belanja</th>
                                                 <th>Kasir</th>
                                                 <th>Tgl Transaksi</th>
@@ -110,6 +111,7 @@
                                                 <tr>
                                                     <td><strong>#{{ $row->invoice }}</strong></td>
                                                     <td>{{ $row->customer }}</td>
+                                                    <td>{{ $row->table }}</td>
                                                     <td>Rp {{ number_format($row->total) }}</td>
                                                     <td>{{ $row->user->name }}</td>
                                                     <td>{{ $row->created_at->format('d-m-Y H:i:s') }}</td>

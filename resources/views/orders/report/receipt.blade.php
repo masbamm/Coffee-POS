@@ -7,7 +7,7 @@
         table.receipt-table {
             width: 300px;
             border-collapse: collapse;
-            font-size: 8px;
+            font-size: 7px;
 
         }
 
@@ -48,6 +48,10 @@
             <tr>
                 <td>Customer</td>
                 <td colspan="2">: {{ $order->customer }}</td>
+            </tr>
+            <tr>
+                <td>No Meja</td>
+                <td colspan="2">: {{ $order->table }}</td>
             </tr>
         </tbody>
     </table>
@@ -97,6 +101,10 @@
             <td colspan="5" class="text-center">Tidak ada data</td>
         </tr>
         @endforelse
+        <tr class="border-top">
+            <td><b>Catatan :</b></td>
+            <td colspan="4"><b> {{$order->catatan}}</b></td>
+        </tr>
         <tr class="border-top">
             <td colspan="4"><b>Total :</b></td>
             <td><b>Rp {{ number_format($total) }}</b></td>

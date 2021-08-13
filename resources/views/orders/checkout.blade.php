@@ -44,8 +44,16 @@
                                     <input type="text" name="name" class="form-control" v-model="customer.name" required>
                                 </div>
                                 <div class="form-group">
+                                    <label for="">Nomor Meja</label>
+                                    <input type="text" name="name" class="form-control" v-model="customer.table" required>
+                                </div>
+                                <div class="form-group">
                                     <label for="">Bayar</label>
                                     <input type="number" name="paid" class="form-control" v-model="customer.paid" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Catatan</label>
+                                    <input type="text" name="catatan" class="form-control" v-model="customer.catatan" required>
                                 </div>
                             </div>
                             <div class="card-footer text-muted">

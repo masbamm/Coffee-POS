@@ -67,7 +67,7 @@
                                     </div>
 
                                     <!-- MENAMPILKAN DETAIL PRODUCT -->
-                                    <div class="col-md-5">
+                                    <div class="col-md-8">
                                         <h4>Detail Produk</h4>
                                         <div v-if="product.name">
                                             <table class="table table-stripped">

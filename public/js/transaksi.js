@@ -18116,6 +18116,7 @@ new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
       qty: '',
       price: '',
       name: '',
+      description: '',
       photo: ''
     },
     cart: {
@@ -18123,8 +18124,9 @@ new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
       qty: 1
     },
     customer: {
-      name: '',
-      paid: 0
+      bukti: '',
+      paid: 0,
+      catatan: ''
     },
     submitForm: false,
     errorMessage: '',
@@ -18291,7 +18293,8 @@ new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
 
                   _this7.customer = {
                     name: '',
-                    paid: 0
+                    paid: 0,
+                    catatan: ''
                   }; //submitForm kembali di-set menjadi false
 
                   _this7.submitForm = false;
@@ -18320,7 +18323,7 @@ new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\coffe\resources\js\transaksi.js */"./resources/js/transaksi.js");
+module.exports = __webpack_require__(/*! E:\Punya Ropi\coffe\resources\js\transaksi.js */"./resources/js/transaksi.js");
 
 
 /***/ })

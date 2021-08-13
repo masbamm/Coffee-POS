@@ -213,6 +213,8 @@ class OrderController extends Controller
             $order = Order::create([
                 'invoice' => $this->generateInvoice(),
                 'customer' => $request->name,
+                'table'=> $request->table,
+                'catatan' => $request->catatan,
                 'paid' => $request->paid,
                 'user_id' => auth()->user()->id,
                 'total' => $total
@@ -227,6 +229,10 @@ class OrderController extends Controller
                     'qty' => $row['qty'],
                     'price' => $row['price']
                 ]);
+                // $bahan=Material::where('product_id',$key)->first();
+                // $bahan->update([
+                //         'stock' =>$bahan->stock-$row['qty'],
+                //  ]);
             }
             //apabila tidak terjadi error, penyimpanan diverifikasi
             DB::commit();

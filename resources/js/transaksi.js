@@ -25,7 +25,8 @@ new Vue({
       },
       customer: {
           bukti:'',
-          paid:0
+          paid:0,
+          catatan:''
       },
       submitForm: false,
       errorMessage: '',
@@ -70,7 +71,7 @@ new Vue({
               setTimeout(() => {
                   this.shoppingCart = response.data
                   this.cart.product_id = ''
-                  this.getAmmount() 
+                  this.getAmmount()
                   this.cart.qty = 1
                   this.product = {
                       id:'',
@@ -135,7 +136,7 @@ new Vue({
         //Mengosongkan var errorMessage dan message
         this.errorMessage = ''
         this.message = ''
-        
+
         //jika var customer.email dan kawan-kawannya tidak kosong
         if (this.customer.name != '') {
            if(this.customer.paid < 0){
@@ -181,6 +182,7 @@ new Vue({
                             this.customer = {
                                 name:'',
                                 paid:0,
+                                catatan:''
                             }
                             //submitForm kembali di-set menjadi false
                             this.submitForm = false
