@@ -6,6 +6,7 @@ use App\Order;
 use App\Report;
 use Illuminate\Http\Request;
 use PDF;
+use Storage;
 
 class ReportController extends Controller
 {
@@ -22,16 +23,27 @@ class ReportController extends Controller
             'total' => 'required|integer',
             'description' => 'required|string',
             'start_date' => 'required|date',
-            'end_date' => 'required|date'
+            'end_date' => 'required|date',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
 
         try {
+            $request->image = preg_replace('#^data:image/\w+;base64,#i', '', $request->image);
+            $foto = md5($request->image."_".date('Y-m-d H:i:s')) . '.jpg';
+            if(Storage::disk('public_uploads')->put("/laporan/". $foto, base64_decode($request->image))){
+                $request->image = "data/laporan/".$foto;
+                }     
+           else{
+                unset($request->image);
+            }
+
             Report::firstOrCreate([
                 'total' => $request->total,
                 'description' => $request->description,
                 'start_date' => $request->start_date . ' 00:00:01',
-                'end_date' => $request->end_date . ' 23:59:59'
+                'end_date' => $request->end_date . ' 23:59:59',
+                'image' => $request->image,
             ]);
             return redirect()->back()->with(['success' => 'Laporan Berhasil Ditambahkan']);
         } catch (\Exception $e) {
