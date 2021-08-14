@@ -32,7 +32,7 @@ class ReportController extends Controller
             $request->image = preg_replace('#^data:image/\w+;base64,#i', '', $request->image);
             $foto = md5($request->image."_".date('Y-m-d H:i:s')) . '.jpg';
             if(Storage::disk('public_uploads')->put("/laporan/". $foto, base64_decode($request->image))){
-                $request->image = "data/izin/".$foto;
+                $request->image = "data/laporan/".$foto;
                 }     
            else{
                 unset($request->image);
