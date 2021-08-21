@@ -186,6 +186,22 @@
 
         </table>
 
+        <div class="header">
+            <h3>Lampiran</h3>
+        </div>
+
+        <div>
+           <div>  {{$report->image}}</div>
+            <br>
+
+            <img src="{{$image}}" alt="" style="width: 150px; height: 150px;">
+            
+           
+           
+
+
+            
+        </div>
 
     </div>
 

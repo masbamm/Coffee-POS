@@ -19,20 +19,21 @@ class ReportController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'total' => 'required|integer',
-            'description' => 'required|string',
-            'start_date' => 'required|date',
-            'end_date' => 'required|date',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
+        //dd($request->image);
+        // $this->validate($request, [
+        //     'total' => 'required|integer',
+        //     'description' => 'required|string',
+        //     'start_date' => 'required|date',
+        //     'end_date' => 'required|date',
+        //     'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        // ]);
 
-
+        
         try {
-            $request->image = preg_replace('#^data:image/\w+;base64,#i', '', $request->image);
             $foto = md5($request->image."_".date('Y-m-d H:i:s')) . '.jpg';
-            if(Storage::disk('public_uploads')->put("/laporan/". $foto, base64_decode($request->image))){
-                $request->image = "data/laporan/".$foto;
+            $uploaded = Storage::disk('public_uploads')->put("/laporan", $request->image);
+            if($uploaded){
+                $request->image = $uploaded;
                 }     
            else{
                 unset($request->image);
@@ -100,9 +101,10 @@ class ReportController extends Controller
         $orders = Order::orderBy('created_at', 'ASC')->whereBetween('created_at', [$report->start_date, $report->end_date])->get();
 
         $total = $this->countTotal($orders);
+        $image = base64_encode(Storage::disk('public_uploads')->get($report->image));
 
         $pdf = PDF::setOptions(['dpi' => 120])
-            ->loadView('report.invoice', compact('report', 'orders', 'total'));
+            ->loadView('report.invoice', compact('report', 'orders', 'total', 'image'));
         return $pdf->stream();
     }
 

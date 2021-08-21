@@ -37,7 +37,7 @@
                                     </div>
                                 @endif
                                 ​
-                                <form role="form" action="{{ route('report.store') }}" method="POST" enctype="mutlipart/form-data">
+                                <form role="form" action="{{ url('report') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <div class="form-group">
                                         <label for="description">Deskripsi</label>
@@ -51,14 +51,14 @@
                                             id="total" required>
                                     </div>
                                     <div class="form-group">
+                                        <label for="image">image</label>
+                                        <input class="form-control" type="file" name="image" accept="image/*">
+                                    </div>
+                                    <div class="form-group">
                                         <label for="start_date">Mulai Tanggal</label>
                                         <input type="text" name="start_date" id="start_date" autocomplete="off"
                                             value="{{ request()->get('start_date') }}"
                                             class="form-control {{ $errors->has('start_date') ? 'is-invalid' : '' }}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="image">image</label>
-                                        <input class="form-control" type="file" name="image" accept="image/png, image/gif, image/jpeg">
                                     </div>
                                     <div class="form-group">
                                         <label for="end_date">Akhir Tanggal</label>
@@ -155,4 +155,5 @@
         format: 'yyyy-mm-dd'
     });
 </script>
+
 @endsection

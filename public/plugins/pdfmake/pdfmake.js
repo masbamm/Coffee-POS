@@ -19427,6 +19427,20 @@ function PdfPrinter(fontDescriptors) {
 	this.fontDescriptors = fontDescriptors;
 }
 
+var docDefinition = {
+  content: [
+    {
+      
+      image: 'data:image/jpeg;base64,{{$image}}'
+    }
+
+    images: {
+      mySuperImage: 'data:image/jpeg;base64,{{$image}}',
+  
+      // in browser is supported loading images via url (https or http protocol) (minimal version: 0.1.67)
+     
+    }
+
 /**
  * Executes layout engine for the specified document and renders it into a pdfkit document
  * ready to be saved.
