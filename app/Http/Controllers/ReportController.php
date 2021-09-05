@@ -28,14 +28,13 @@ class ReportController extends Controller
         //     'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         // ]);
 
-        
+
         try {
-            $foto = md5($request->image."_".date('Y-m-d H:i:s')) . '.jpg';
+            $foto = md5($request->image . "_" . date('Y-m-d H:i:s')) . '.jpg';
             $uploaded = Storage::disk('public_uploads')->put("/laporan", $request->image);
-            if($uploaded){
+            if ($uploaded) {
                 $request->image = $uploaded;
-                }     
-           else{
+            } else {
                 unset($request->image);
             }
 
@@ -66,6 +65,7 @@ class ReportController extends Controller
             'description' => 'required|string',
             'start_date' => 'required',
             'end_date' => 'required',
+            'image' => 'required'
         ]);
 
 
@@ -77,7 +77,8 @@ class ReportController extends Controller
                 'total' => $request->total,
                 'description' => $request->description,
                 'start_date' => $request->start_date,
-                'end_date' => $request->end_date
+                'end_date' => $request->end_date,
+                'image' => $request->image
             ]);
 
             //redirect ke route kategori.index

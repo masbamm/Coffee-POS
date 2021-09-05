@@ -54,6 +54,10 @@
                                             id="total" required>
                                     </div>
                                     <div class="form-group">
+                                        <label for="image">image</label>
+                                        <input class="form-control" type="file" name="image" accept="image/*">
+                                    </div>
+                                    <div class="form-group">
                                         <label for="start_date">Mulai Tanggal</label>
                                         <input type="text" name="start_date" id="start_date" autocomplete="off"
                                             value="{{ $report->start_date ?? request()->get('start_date') }}"
@@ -62,7 +66,8 @@
                                     <div class="form-group">
                                         <label for="end_date">Akhir Tanggal</label>
                                         <input type="text" name="end_date" id="end_date" autocomplete="off"
-                                            value="{{ $report->end_date ?? request()->get('end_date') }}" class="form-control
+                                            value="{{ $report->end_date ?? request()->get('end_date') }}"
+                                            class="form-control
                                                                                                         class="
                                             form-control {{ $errors->has('end_date') ? 'is-invalid' : '' }}">
                                     </div>
