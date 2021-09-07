@@ -53,8 +53,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="image">image</label>
-                                        <input class="form-control" type="file" name="image" accept="image/*"
-                                            multiple="multiple">
+                                        <input class="form-control" type="file" name="image[]" accept="image/*" multiple>
                                     </div>
                                     <div class="form-group">
                                         <label for="start_date">Mulai Tanggal</label>

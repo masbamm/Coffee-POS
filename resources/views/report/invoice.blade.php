@@ -191,9 +191,14 @@
         </div>
 
         <div>
-            <img
-                src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path("data/$report->image"))) }}">
-
+            @if (!is_array($image))
+                <img
+                    src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path("data/$report->image"))) }}">
+            @else
+                @foreach ($image as $key)
+                    <img src="data:image/png;base64,{{ base64_encode($key) }}">
+                @endforeach
+            @endif
         </div>
 
     </div>

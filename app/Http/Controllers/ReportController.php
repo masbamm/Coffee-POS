@@ -20,21 +20,28 @@ class ReportController extends Controller
 
     public function store(Request $request)
     {
-        try {
-            $foto = md5($request->image . "_" . date('Y-m-d H:i:s')) . '.jpg';
-            $uploaded = Storage::disk('public_uploads')->put("/laporan", $request->image);
-            if ($uploaded) {
-                $request->image = $uploaded;
-            } else {
-                unset($request->image);
-            }
 
+        try {
+            $image = array();
+            if (is_array($request->image)) {
+                foreach ($request->image as $key => $val) {
+                    $uploaded = Storage::disk('public_uploads')->put("/laporan", $val);
+                    if ($uploaded) {
+                        $image[$key] = $uploaded;
+                    }
+                }
+            } else {
+                $uploaded = Storage::disk('public_uploads')->put("/laporan", $request->image);
+                if ($uploaded) {
+                    $image[] = $uploaded;
+                }
+            }
             Report::firstOrCreate([
                 'total' => $request->total,
                 'description' => $request->description,
                 'start_date' => $request->start_date . ' 00:00:01',
                 'end_date' => $request->end_date . ' 23:59:59',
-                'image' => $request->image,
+                'image' => json_encode($image),
             ]);
             return redirect()->back()->with(['success' => 'Laporan Berhasil Ditambahkan']);
         } catch (\Exception $e) {
@@ -93,7 +100,15 @@ class ReportController extends Controller
         $orders = Order::orderBy('created_at', 'ASC')->whereBetween('created_at', [$report->start_date, $report->end_date])->get();
 
         $total = $this->countTotal($orders);
-        $image = Storage::disk('public_uploads')->get($report->image);
+
+        if (is_array(json_decode($report->image, TRUE))) {
+            $image = array();
+            foreach (json_decode($report->image, TRUE) as $key) {
+                $image[] = Storage::disk('public_uploads')->get($key);
+            }
+        } else {
+            $image = Storage::disk('public_uploads')->get($report->image);
+        }
         $pdf = PDF::setOptions(['dpi' => 120], ['isRemoteEnabled' => true], ['DOMPDF_ENABLE_REMOTE' => true],  ['isHtml5ParserEnabled' => true], ['isPhpEnabled' => true], ['isJavascriptEnabled' => true])
             ->loadView('report.invoice', compact('report', 'orders', 'total', 'image'));
         return $pdf->stream();
