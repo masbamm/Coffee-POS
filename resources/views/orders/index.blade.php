@@ -90,6 +90,16 @@
                                     </div>
                                 </div>
 
+                                @if (session('message'))
+                                    <div class="alert alert-success alert-dismissible">
+                                        <button type="button" class="close" data-dismiss="alert"
+                                            aria-hidden="true">×</button>
+                                        <h5><i class="icon fas fa-check"></i> Success!</h5>
+                                        {!! session('message') !!}
+
+                                    </div>
+                                @endif
+
 
                                 <!-- TABLE UNTUK MENAMPILKAN DATA TRANSAKSI -->
                                 <div class="table-responsive">
@@ -120,9 +130,9 @@
                                                             class="btn btn-primary btn-sm">
                                                             <i class="fa fa-print"></i>
                                                         </a>
-                                                        <a href="{{ route('order.excel', $row->invoice) }}"
-                                                            target="_blank" class="btn btn-info btn-sm">
-                                                            <i class="fa fa-file-excel-o"></i>
+                                                        <a href="{{ route('order.destroy', $row->id) }}" target="_blank"
+                                                            class="btn btn-danger btn-sm">
+                                                            <i class="fa fa-trash"></i>
                                                         </a>
                                                     </td>
                                                 </tr>
@@ -146,14 +156,14 @@
 @endsection
 
 @section('js')
-<script>
-    $('#start_date').datepicker({
-        autoclose: true,
-        format: 'yyyy-mm-dd'
-    });
-    $('#end_date').datepicker({
-        autoclose: true,
-        format: 'yyyy-mm-dd'
-    });
-</script>
+    <script>
+        $('#start_date').datepicker({
+            autoclose: true,
+            format: 'yyyy-mm-dd'
+        });
+        $('#end_date').datepicker({
+            autoclose: true,
+            format: 'yyyy-mm-dd'
+        });
+    </script>
 @endsection

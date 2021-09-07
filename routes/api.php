@@ -22,5 +22,5 @@ Route::get('/product/{id}', 'OrderController@getProduct');
 Route::post('/cart', 'OrderController@addToCart');
 Route::get('/cart', 'OrderController@getCart');
 Route::get('/ammount', 'OrderController@getAmmount');
-Route::delete('/cart/{id}', 'OrderController@removeCart');
+Route::delete('/cart/{id}', 'OrderController@removeCart')->name('order.removeCart');
 Route::get('/chart', 'DashboardController@getChart');

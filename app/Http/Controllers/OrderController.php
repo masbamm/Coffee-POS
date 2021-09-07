@@ -213,7 +213,7 @@ class OrderController extends Controller
             $order = Order::create([
                 'invoice' => $this->generateInvoice(),
                 'customer' => $request->name,
-                'table'=> $request->table,
+                'table' => $request->table,
                 'catatan' => $request->catatan,
                 'paid' => $request->paid,
                 'user_id' => auth()->user()->id,
@@ -253,6 +253,15 @@ class OrderController extends Controller
             ], 400);
         }
     }
+
+
+    public function destroy($id)
+    {
+        $order = Order::findOrFail($id);
+        $order->delete();
+        return redirect()->back()->with(['message' => 'Order Telah Dihapus']);
+    }
+
 
     public function generateInvoice()
     {

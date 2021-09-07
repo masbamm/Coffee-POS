@@ -7,6 +7,7 @@ use App\Report;
 use Illuminate\Http\Request;
 use PDF;
 use Storage;
+use Dompdf\Dompdf;
 
 class ReportController extends Controller
 {
@@ -19,16 +20,6 @@ class ReportController extends Controller
 
     public function store(Request $request)
     {
-        //dd($request->image);
-        // $this->validate($request, [
-        //     'total' => 'required|integer',
-        //     'description' => 'required|string',
-        //     'start_date' => 'required|date',
-        //     'end_date' => 'required|date',
-        //     'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        // ]);
-
-
         try {
             $foto = md5($request->image . "_" . date('Y-m-d H:i:s')) . '.jpg';
             $uploaded = Storage::disk('public_uploads')->put("/laporan", $request->image);
@@ -102,9 +93,8 @@ class ReportController extends Controller
         $orders = Order::orderBy('created_at', 'ASC')->whereBetween('created_at', [$report->start_date, $report->end_date])->get();
 
         $total = $this->countTotal($orders);
-        $image = base64_encode(Storage::disk('public_uploads')->get($report->image));
-
-        $pdf = PDF::setOptions(['dpi' => 120])
+        $image = Storage::disk('public_uploads')->get($report->image);
+        $pdf = PDF::setOptions(['dpi' => 120], ['isRemoteEnabled' => true], ['DOMPDF_ENABLE_REMOTE' => true],  ['isHtml5ParserEnabled' => true], ['isPhpEnabled' => true], ['isJavascriptEnabled' => true])
             ->loadView('report.invoice', compact('report', 'orders', 'total', 'image'));
         return $pdf->stream();
     }

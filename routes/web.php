@@ -34,6 +34,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/order', 'OrderController@index')->name('order.index');
     Route::get('/order/pdf/{invoice}', 'OrderController@invoicePdf')->name('order.pdf');
     Route::get('/order/excel/{invoice}', 'OrderController@invoiceExcel')->name('order.excel');
+    Route::get('/order/{id}', 'OrderController@destroy')->name('order.destroy');
 
     Route::middleware(['checkRole:kasir'])->group(function () {
         Route::get('/transaksi', 'OrderController@addOrder')->name('order.transaksi');

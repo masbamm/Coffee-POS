@@ -191,16 +191,9 @@
         </div>
 
         <div>
-           <div>  {{$report->image}}</div>
-            <br>
+            <img
+                src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path("data/$report->image"))) }}">
 
-            <img src="{{$image}}" alt="" style="width: 150px; height: 150px;">
-            
-           
-           
-
-
-            
         </div>
 
     </div>

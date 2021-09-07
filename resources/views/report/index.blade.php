@@ -37,7 +37,8 @@
                                     </div>
                                 @endif
                                 ​
-                                <form role="form" action="{{ url('report') }}" method="POST" enctype="multipart/form-data">
+                                <form role="form" action="{{ url('report') }}" method="POST"
+                                    enctype="multipart/form-data">
                                     @csrf
                                     <div class="form-group">
                                         <label for="description">Deskripsi</label>
@@ -52,7 +53,8 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="image">image</label>
-                                        <input class="form-control" type="file" name="image" accept="image/*">
+                                        <input class="form-control" type="file" name="image" accept="image/*"
+                                            multiple="multiple">
                                     </div>
                                     <div class="form-group">
                                         <label for="start_date">Mulai Tanggal</label>
@@ -63,9 +65,10 @@
                                     <div class="form-group">
                                         <label for="end_date">Akhir Tanggal</label>
                                         <input type="text" name="end_date" id="end_date" autocomplete="off"
-                                            value="{{ request()->get('end_date') }}" class="form-control
-                                                                                class=" form-control
-                                            {{ $errors->has('end_date') ? 'is-invalid' : '' }}">
+                                            value="{{ request()->get('end_date') }}"
+                                            class="form-control
+                                                                                class="
+                                            form-control {{ $errors->has('end_date') ? 'is-invalid' : '' }}">
                                     </div>
                                     <div class="card-footer">
                                         <button class="btn btn-primary">Simpan</button>
@@ -107,53 +110,56 @@
                                             @forelse ($report as $row)
                                                 <tr>
                                                     <td>{{ $no++ }}</td>
-                                                    <td style="word-wrap: break-word;min-width: 250px;max-width: 160px;" >{{ $row->description }}</td>
+                                                    <td style="word-wrap: break-word;min-width: 250px;max-width: 160px;">
+                                                        {{ $row->description }}</td>
                                                     <td>{{ $row->total }}</td>
                                                     <td>{{ $row->created_at->format('d-m-Y') }}</td>
                                                     <td>
-                                                        <form action="{{ route('report.destroy', $row->id) }}"
-                                                            method="POST">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <a href="{{ route('report.pdf', $row->id) }}" target="_blank"
-                                                            class="btn btn-primary btn-sm">
-                                                            <i class="fa fa-print"></i>
-                                                            </a>
 
-                                                        <a href="{{ route('report.edit', $row->id) }}"
-                                                            class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
-                                                            <button class="btn btn-danger btn-sm"><i
-                                                                    class="fa fa-trash"></i></button>
-                                                        </form>
-                                                    </td>
-                                                </tr>
-                                            @empty
-                                                <tr>
-                                                    <td colspan="4" class="text-center">Tidak ada data</td>
-                                                </tr>
-                                            @endforelse
-                                        </tbody>
-                                    </table>
+
+
                                 </div>
+                                <form action="{{ route('report.destroy', $row->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <a href="{{ route('report.pdf', $row->id) }}" target="_blank"
+                                        class="btn btn-primary btn-sm">
+                                        <i class="fa fa-print"></i>
+                                    </a>
+
+                                    <a href="{{ route('report.edit', $row->id) }}" class="btn btn-warning btn-sm"><i
+                                            class="fa fa-edit"></i></a>
+                                    <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
+                                </form>
+                                </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="4" class="text-center">Tidak ada data</td>
+                                </tr>
+                                @endforelse
+                                </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+    </div>
+    </section>
     </div>
 @endsection
 
 @section('js')
-<script>
-    $('#start_date').datepicker({
-        autoclose: true,
-        format: 'yyyy-mm-dd'
-    });
-    $('#end_date').datepicker({
-        autoclose: true,
-        format: 'yyyy-mm-dd'
-    });
-</script>
+    <script>
+        $('#start_date').datepicker({
+            autoclose: true,
+            format: 'yyyy-mm-dd'
+        });
+        $('#end_date').datepicker({
+            autoclose: true,
+            format: 'yyyy-mm-dd'
+        });
+    </script>
 
 @endsection
