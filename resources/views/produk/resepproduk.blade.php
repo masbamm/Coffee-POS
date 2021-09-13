@@ -49,12 +49,7 @@
                                     <table class="table table-hover">
                                         <thead>
                                             <tr>
-                                                <th>#</th>
-                                                <th>Nama Produk</th>
-                                                <th>Status</th>
-                                                <th>Harga</th>
-                                                <th>Kategori</th>
-                                                <th>Resep</th>
+                                                <th>Bahan Baku</th>
                                                 <th>Last Update</th>
                                                 @if (auth()->user()->role != 'admin')
                                                 <th>Aksi</th>
@@ -64,27 +59,11 @@
                                         <tbody>
                                             @forelse ($products as $row)
                                                 <tr>
-                                                    <td>
-                                                        @if (!empty($row->photo))
-                                                            <img src="{{ asset('storage/products/' . $row->photo) }}"
-                                                                alt="{{ $row->id }}" width="50px" height="50px">
-                                                        @else
-                                                            <img src="https://i.ibb.co/cLNxV4b/TESTUPLOAD.jpg"
-                                                                alt="{{ $row->name }}">
-                                                        @endif
-                                                    </td>
+                                                     
                                                     <td>
                                                         <sup class="label label-success">({{ $row->code }})</sup>
                                                         <strong>{{ ucfirst($row->name) }}</strong>
                                                     </td>
-                                                    <td>{!! $row->status_label !!}</td>
-                                                    <td>Rp {{ number_format($row->price) }}</td>
-                                                    <td>{{ $row->category->name }}</td>
-                                                    <td>
-                                                        <a href="{{ route('resep.edit', $row->code) }}"
-                                                            class="btn btn-warning btn-sm">
-                                                            <i class="fa fa-info"></i>
-                                                        </a>
                                                     <td>{{ $row->updated_at }}</td>
                                                     <td>
                                                         @if (auth()->user()->role != 'admin')
@@ -123,5 +102,4 @@
             </div>
         </section>
     </div>
-    
 @endsection

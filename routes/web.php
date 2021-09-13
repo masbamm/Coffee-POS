@@ -46,6 +46,7 @@ Route::middleware(['auth'])->group(function () {
         Route::middleware(['checkRole:admin'])->group(function () {
             Route::resource('/kategori', 'CategoryController')->except(['create', 'show']);
             Route::resource('/user', 'UserController');
+            Route::resource('/resep', 'ResepController');
             Route::resource('/report', 'ReportController')->except(['create', 'show']);
             Route::get('/report/pdf/{invoice}', 'ReportController@invoicePdf')->name('report.pdf');
         });
