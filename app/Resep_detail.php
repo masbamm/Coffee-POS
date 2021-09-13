@@ -8,6 +8,6 @@ class Resep_detail extends Model
 {
     protected $guarded = [];
     public function material() {
-        return $this->belongsToMany(Material::class,'name');
+        return $this->hasOne(Material::class,'id', 'id_material');
     }
 }

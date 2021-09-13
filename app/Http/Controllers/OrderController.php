@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Order;
 use App\Product;
 use App\Report;
+use App\Resep;
 use Carbon\Carbon;
 use PDF;
 use Illuminate\Http\Request;
@@ -222,25 +223,42 @@ class OrderController extends Controller
             ]);
 
             //looping cart untuk disimpan ke table order_details
+           
             foreach ($result as $key => $row) {
+                
+                $product = Product::where('code',$row['code'])->first();
+                $reseps = Resep::where('code', $row['code'])->first()->resepMat;
+                foreach($reseps as $resep => $resMat){
+                    $resMat->material->stock -= 1 * $row['qty'];
+                    $resMat->material->save();
+                }
+
                 $order->order_detail()->create([
                     'product_id' => $key,
                     'qty' => $row['qty'],
                     'price' => $row['price']
+                    
                 ]);
 
+                // $ordermaterial = Resep::join('products', 'products.code', '=', 'reseps.code')
+                // ->join('resep_details','resep_details.id_reseps','=','reseps.id')
+                // ->join('materials','materials.id','=','resep_details.id_material')->where('reseps.code','=',$key)->get();
+                // foreach($ordermaterial as $d =>$row1){
+                //     $change=($row1['stock']-$row['qty']);
+                //     var_dump($change);
+                //     DB::table('materials')
+                //      ->where('id', $key)
+                //     ->update(['stock' => $change]);
+                //     // $ordermaterial=update(['materials.stock' => $change]);
+                // }       
                 // $ordermaterial = Order_detail::join('products', 'products.code', '=', 'order_details.product_id')
                 // ->join('resep','resep.code','=','products.code')
                 // ->join('resep_details','resep_details.id_reseps','=','reseps.id')->
                 // where('order_details.product_id','=',$key)->get();
                 
-                $ordermaterial = Resep::join('products', 'products.code', '=', 'reseps.code')
-                ->join('resep_details','resep_details.id_reseps','=','reseps.id')
-                ->join('materials','materials.id','=','resep_details.id_material')->where('reseps.code','=',$key)->first();
-                foreach($ordermaterial as $d){
-                    $change=$d->stock-$row['qty'];
-                    $ordermaterial=update(['materials.stock' => $change]);
-                }
+                
+                
+
                 // $bahan=Material::where('product_id',$key)->first();
                 // $bahan->update([
                 //         'stock' =>$bahan->stock-$row['qty'],

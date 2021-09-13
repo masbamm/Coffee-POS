@@ -12,4 +12,9 @@ class Resep extends Model
     {
         return $this->hasMany(Product::class);
     }
+
+    public function resepMat()
+    {
+        return $this->hasMany(Resep_detail::class, 'id_reseps');
+    }
 }

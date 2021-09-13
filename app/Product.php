@@ -13,6 +13,11 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
 
+    public function resep()
+    {
+        return $this->belongsTo(Resep::class);
+    }
+
     public function getStatusLabelAttribute()
     {
         if ($this->status == "0") {
