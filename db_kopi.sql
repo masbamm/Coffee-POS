@@ -2,10 +2,10 @@
 -- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Sep 12, 2021 at 06:16 PM
+-- Host: 127.0.0.1
+-- Generation Time: Sep 13, 2021 at 05:20 PM
 -- Server version: 10.4.17-MariaDB
--- PHP Version: 8.0.1
+-- PHP Version: 7.4.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -79,7 +79,7 @@ CREATE TABLE `materials` (
 --
 
 INSERT INTO `materials` (`id`, `name`, `stock`, `category`, `additional`, `created_at`, `updated_at`) VALUES
-(1, 'Kopi', 4, 'Minuman', 'Pcs', '2021-06-06 22:44:08', '2021-07-21 02:46:30'),
+(1, 'Kopi', 2, 'Minuman', 'Pcs', '2021-06-06 22:44:08', '2021-09-13 14:39:42'),
 (2, 'Ayam', 1, 'Makanan', 'Kg', '2021-07-21 01:54:59', '2021-07-24 01:55:05'),
 (3, 'Telur', 1, 'Makanan', 'Kg', '2021-07-21 01:55:20', '2021-07-24 01:54:39'),
 (4, 'Kulit Ayam', 500, 'Makanan', 'g', '2021-07-21 01:55:50', '2021-07-24 01:54:20'),
@@ -100,7 +100,7 @@ INSERT INTO `materials` (`id`, `name`, `stock`, `category`, `additional`, `creat
 (19, 'Strawberry', 250, 'Makanan', 'g', '2021-07-21 02:42:23', '2021-07-28 17:49:43'),
 (20, 'Pisang', 2, 'Makanan', 'Sisir', '2021-07-21 02:44:41', '2021-07-28 17:22:36'),
 (21, 'Jeruk', 2, 'Makanan', 'Kg', '2021-07-21 02:45:48', '2021-07-28 17:22:16'),
-(22, 'Coklat Bubuk 250 g', 3, 'Minuman', 'Pack', '2021-07-21 02:47:30', '2021-07-24 01:42:42'),
+(22, 'Coklat Bubuk 250 g', -2, 'Minuman', 'Pack', '2021-07-21 02:47:30', '2021-09-13 14:39:42'),
 (23, 'Gula Aren Bubuk 500 g', 2, 'Minuman', 'Pack', '2021-07-21 02:48:30', '2021-07-29 02:47:35');
 
 -- --------------------------------------------------------
@@ -194,7 +194,17 @@ INSERT INTO `orders` (`id`, `invoice`, `customer`, `table`, `user_id`, `total`, 
 (30, 'INV-29', 'Bambang', '', 4, 28000, 50000, 'Hot Water', '2021-08-05 15:57:28', '2021-08-05 15:57:28'),
 (31, 'INV-30', 'Iqbal Yusuf Fadillah', '', 8, 0, 77777, 'oker', '2021-08-06 14:21:36', '2021-08-06 14:21:36'),
 (33, 'INV-31', 'Padil', 'T03', 5, 72000, 100000, NULL, '2021-08-13 08:06:26', '2021-08-13 08:06:26'),
-(34, 'INV-32', 'Ropi Naks Garut', 'T03', 5, 96000, 100000, NULL, '2021-08-13 09:27:59', '2021-08-13 09:27:59');
+(34, 'INV-32', 'Ropi Naks Garut', 'T03', 5, 96000, 100000, NULL, '2021-08-13 09:27:59', '2021-08-13 09:27:59'),
+(36, 'INV-33', 'Riki Buldan Al Hariri', 'dadah', 8, 14000, 20000, NULL, '2021-09-13 02:47:47', '2021-09-13 02:47:47'),
+(46, 'INV-34', 'riki buldan', 'riki buldan', 8, 28000, 59000, NULL, '2021-09-13 07:47:48', '2021-09-13 07:47:48'),
+(47, 'INV-35', 'riki buldan', 'riki buldan', 8, 14000, 30000, 'gaul', '2021-09-13 07:50:00', '2021-09-13 07:50:00'),
+(48, 'INV-36', 'riki buldan', 'riki buldan', 8, 14000, 400000, NULL, '2021-09-13 07:52:00', '2021-09-13 07:52:00'),
+(49, 'INV-37', 'dadsadsa', 'dadsadsa', 8, 14000, 30000, NULL, '2021-09-13 07:53:39', '2021-09-13 07:53:39'),
+(50, 'INV-38', 'riki buldan', 'riki buldan', 8, 14000, 30000, NULL, '2021-09-13 08:00:43', '2021-09-13 08:00:43'),
+(51, 'INV-39', 'riki buldan', 'riki buldan', 8, 14000, 20000, 'test', '2021-09-13 14:04:11', '2021-09-13 14:04:11'),
+(52, 'INV-40', 'riki buldan', 'riki buldan', 8, 14000, 20000, 'tes', '2021-09-13 14:05:22', '2021-09-13 14:05:22'),
+(56, 'INV-41', 'riki buldan', 'riki buldan', 8, 14000, 20000, 'tes', '2021-09-13 14:38:28', '2021-09-13 14:38:28'),
+(57, 'INV-42', 'riki buldan', 'riki buldan', 8, 56000, 100000000, 'test', '2021-09-13 14:39:42', '2021-09-13 14:39:42');
 
 -- --------------------------------------------------------
 
@@ -245,7 +255,17 @@ INSERT INTO `order_details` (`id`, `order_id`, `product_id`, `qty`, `price`, `cr
 (42, 33, 7, 2, 26000, '2021-08-13 08:06:26', '2021-08-13 08:06:26'),
 (43, 33, 16, 1, 20000, '2021-08-13 08:06:26', '2021-08-13 08:06:26'),
 (44, 34, 19, 2, 14000, '2021-08-13 09:27:59', '2021-08-13 09:27:59'),
-(45, 34, 14, 4, 17000, '2021-08-13 09:27:59', '2021-08-13 09:27:59');
+(45, 34, 14, 4, 17000, '2021-08-13 09:27:59', '2021-08-13 09:27:59'),
+(47, 36, 19, 1, 14000, '2021-09-13 02:47:47', '2021-09-13 02:47:47'),
+(57, 46, 19, 2, 14000, '2021-09-13 07:47:48', '2021-09-13 07:47:48'),
+(58, 47, 19, 1, 14000, '2021-09-13 07:50:00', '2021-09-13 07:50:00'),
+(59, 48, 19, 1, 14000, '2021-09-13 07:52:00', '2021-09-13 07:52:00'),
+(60, 49, 19, 1, 14000, '2021-09-13 07:53:39', '2021-09-13 07:53:39'),
+(61, 50, 19, 1, 14000, '2021-09-13 08:00:43', '2021-09-13 08:00:43'),
+(62, 51, 19, 1, 14000, '2021-09-13 14:04:11', '2021-09-13 14:04:11'),
+(63, 52, 19, 1, 14000, '2021-09-13 14:05:22', '2021-09-13 14:05:22'),
+(64, 56, 19, 1, 14000, '2021-09-13 14:38:28', '2021-09-13 14:38:28'),
+(65, 57, 19, 4, 14000, '2021-09-13 14:39:42', '2021-09-13 14:39:42');
 
 -- --------------------------------------------------------
 
@@ -344,6 +364,44 @@ INSERT INTO `reports` (`id`, `description`, `total`, `image`, `created_at`, `upd
 (13, 'Test Baruuu', 9000000, 'data/laporan/6948da3f0c2194f6ca29feb074cf759a.jpg', '2021-08-15 02:34:51', '2021-08-15 02:34:51', '2021-08-12 00:00:01', '2021-08-27 23:59:59'),
 (14, 'Upload Ulang', 900000, 'data/laporan/c4a6ce2c7f408c90e983c11bfa757890.jpg', '2021-08-15 02:35:56', '2021-08-15 02:35:56', '2021-08-19 00:00:01', '2021-08-31 23:59:59'),
 (15, 'tetstttt', 172172172, 'laporan/rtajVByL2cywYgLtoBKIZN2sks1pus1Sy6gZoUkp.jpg', '2021-08-15 02:42:39', '2021-08-15 02:42:39', '2021-08-12 00:00:01', '2021-08-24 23:59:59');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `reseps`
+--
+
+CREATE TABLE `reseps` (
+  `id` int(11) NOT NULL,
+  `code` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `reseps`
+--
+
+INSERT INTO `reseps` (`id`, `code`) VALUES
+(1, 'KP-004');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `resep_details`
+--
+
+CREATE TABLE `resep_details` (
+  `id` int(11) NOT NULL,
+  `id_material` int(11) NOT NULL,
+  `id_reseps` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `resep_details`
+--
+
+INSERT INTO `resep_details` (`id`, `id_material`, `id_reseps`) VALUES
+(1, 1, 1),
+(2, 22, 1);
 
 -- --------------------------------------------------------
 
@@ -448,6 +506,18 @@ ALTER TABLE `reports`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `reseps`
+--
+ALTER TABLE `reseps`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `resep_details`
+--
+ALTER TABLE `resep_details`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -486,13 +556,13 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
 -- AUTO_INCREMENT for table `permissions`
@@ -511,6 +581,18 @@ ALTER TABLE `products`
 --
 ALTER TABLE `reports`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `reseps`
+--
+ALTER TABLE `reseps`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `resep_details`
+--
+ALTER TABLE `resep_details`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`
